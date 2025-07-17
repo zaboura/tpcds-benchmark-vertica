@@ -1,0 +1,1329 @@
+--DROP SCHEMA tpcds CASCADE;
+--CREATE SCHEMA IF NOT EXISTS tpcds;
+--
+--CREATE TABLE tpcds.call_center
+--(
+--    cc_call_center_sk         INTEGER               NOT NULL,
+--    cc_call_center_id         CHAR(16)              NOT NULL,
+--    cc_rec_start_date         DATE                          ,
+--    cc_rec_end_date           DATE                          ,
+--    cc_closed_date_sk         INTEGER                       ,
+--    cc_open_date_sk           INTEGER                       ,
+--    cc_name                   VARCHAR(50)                   ,
+--    cc_class                  VARCHAR(50)                   ,
+--    cc_employees              INTEGER                       ,
+--    cc_sq_ft                  INTEGER                       ,
+--    cc_hours                  CHAR(20)                      ,
+--    cc_manager                VARCHAR(40)                   ,
+--    cc_mkt_id                 INTEGER                       ,
+--    cc_mkt_class              CHAR(50)                      ,
+--    cc_mkt_desc               VARCHAR(100)                  ,
+--    cc_market_manager         VARCHAR(40)                   ,
+--    cc_division               INTEGER                       ,
+--    cc_division_name          VARCHAR(50)                   ,
+--    cc_company                INTEGER                       ,
+--    cc_company_name           CHAR(50)                      ,
+--    cc_street_number          CHAR(10)                      ,
+--    cc_street_name            VARCHAR(60)                   ,
+--    cc_street_type            CHAR(15)                      ,
+--    cc_suite_number           CHAR(10)                      ,
+--    cc_city                   VARCHAR(60)                   ,
+--    cc_county                 VARCHAR(30)                   ,
+--    cc_state                  CHAR(2)                       ,
+--    cc_zip                    CHAR(10)                      ,
+--    cc_country                VARCHAR(20)                   ,
+--    cc_gmt_offset             DECIMAL(5,2)                  ,
+--    cc_tax_percentage         DECIMAL(5,2)
+--);
+--
+--CREATE TABLE tpcds.catalog_page
+--(
+--    cp_catalog_page_sk        INTEGER               NOT NULL,
+--    cp_catalog_page_id        CHAR(16)              NOT NULL,
+--    cp_start_date_sk          INTEGER                       ,
+--    cp_end_date_sk            INTEGER                       ,
+--    cp_department             VARCHAR(50)                   ,
+--    cp_catalog_number         INTEGER                       ,
+--    cp_catalog_page_number    INTEGER                       ,
+--    cp_description            VARCHAR(100)                  ,
+--    cp_type                   VARCHAR(100)
+--);
+--
+--CREATE TABLE tpcds.catalog_returns
+--(
+--    cr_item_sk                INTEGER               NOT NULL,
+--    cr_order_number           INTEGER               NOT NULL,
+--    cr_returned_date_sk       INTEGER                       ,
+--    cr_returned_time_sk       INTEGER                       ,
+--    cr_refunded_customer_sk   INTEGER                       ,
+--    cr_refunded_cdemo_sk      INTEGER                       ,
+--    cr_refunded_hdemo_sk      INTEGER                       ,
+--    cr_refunded_addr_sk       INTEGER                       ,
+--    cr_returning_customer_sk  INTEGER                       ,
+--    cr_returning_cdemo_sk     INTEGER                       ,
+--    cr_returning_hdemo_sk     INTEGER                       ,
+--    cr_returning_addr_sk      INTEGER                       ,
+--    cr_call_center_sk         INTEGER                       ,
+--    cr_catalog_page_sk        INTEGER                       ,
+--    cr_ship_mode_sk           INTEGER                       ,
+--    cr_warehouse_sk           INTEGER                       ,
+--    cr_reason_sk              INTEGER                       ,
+--    cr_return_quantity        INTEGER                       ,
+--    cr_return_amount          DECIMAL(7,2)                  ,
+--    cr_return_tax             DECIMAL(7,2)                  ,
+--    cr_return_amt_inc_tax     DECIMAL(7,2)                  ,
+--    cr_fee                    DECIMAL(7,2)                  ,
+--    cr_return_ship_cost       DECIMAL(7,2)                  ,
+--    cr_refunded_cash          DECIMAL(7,2)                  ,
+--    cr_reversed_charge        DECIMAL(7,2)                  ,
+--    cr_store_credit           DECIMAL(7,2)                  ,
+--    cr_net_loss               DECIMAL(7,2)
+--);
+--
+--CREATE TABLE tpcds.catalog_sales
+--(
+--    cs_item_sk                INTEGER               NOT NULL,
+--    cs_order_number           INTEGER               NOT NULL,
+--    cs_sold_date_sk           INTEGER                       ,
+--    cs_sold_time_sk           INTEGER                       ,
+--    cs_ship_date_sk           INTEGER                       ,
+--    cs_bill_customer_sk       INTEGER                       ,
+--    cs_bill_cdemo_sk          INTEGER                       ,
+--    cs_bill_hdemo_sk          INTEGER                       ,
+--    cs_bill_addr_sk           INTEGER                       ,
+--    cs_ship_customer_sk       INTEGER                       ,
+--    cs_ship_cdemo_sk          INTEGER                       ,
+--    cs_ship_hdemo_sk          INTEGER                       ,
+--    cs_ship_addr_sk           INTEGER                       ,
+--    cs_call_center_sk         INTEGER                       ,
+--    cs_catalog_page_sk        INTEGER                       ,
+--    cs_ship_mode_sk           INTEGER                       ,
+--    cs_warehouse_sk           INTEGER                       ,
+--    cs_promo_sk               INTEGER                       ,
+--    cs_quantity               INTEGER                       ,
+--    cs_wholesale_cost         DECIMAL(7,2)                  ,
+--    cs_list_price             DECIMAL(7,2)                  ,
+--    cs_sales_price            DECIMAL(7,2)                  ,
+--    cs_ext_discount_amt       DECIMAL(7,2)                  ,
+--    cs_ext_sales_price        DECIMAL(7,2)                  ,
+--    cs_ext_wholesale_cost     DECIMAL(7,2)                  ,
+--    cs_ext_list_price         DECIMAL(7,2)                  ,
+--    cs_ext_tax                DECIMAL(7,2)                  ,
+--    cs_coupon_amt             DECIMAL(7,2)                  ,
+--    cs_ext_ship_cost          DECIMAL(7,2)                  ,
+--    cs_net_paid               DECIMAL(7,2)                  ,
+--    cs_net_paid_inc_tax       DECIMAL(7,2)                  ,
+--    cs_net_paid_inc_ship      DECIMAL(7,2)                  ,
+--    cs_net_paid_inc_ship_tax  DECIMAL(7,2)                  ,
+--    cs_net_profit             DECIMAL(7,2)
+--);
+--
+--CREATE TABLE tpcds.customer_address
+--(
+--    ca_address_sk             INTEGER               NOT NULL,
+--    ca_address_id             CHAR(16)              NOT NULL,
+--    ca_street_number          CHAR(10)                      ,
+--    ca_street_name            VARCHAR(60)                   ,
+--    ca_street_type            CHAR(15)                      ,
+--    ca_suite_number           CHAR(10)                      ,
+--    ca_city                   VARCHAR(60)                   ,
+--    ca_county                 VARCHAR(30)                   ,
+--    ca_state                  CHAR(2)                       ,
+--    ca_zip                    CHAR(10)                      ,
+--    ca_country                VARCHAR(20)                   ,
+--    ca_gmt_offset             DECIMAL(5,2)                  ,
+--    ca_location_type          CHAR(20)
+--);
+--
+--CREATE TABLE tpcds.customer_demographics
+--(
+--    cd_demo_sk                INTEGER  NOT NULL,
+--    cd_gender                 CHAR(1)  NOT NULL,
+--    cd_marital_status         CHAR(1)  NOT NULL,
+--    cd_education_status       CHAR(20) NOT NULL,
+--    cd_purchase_estimate      INTEGER  NOT NULL,
+--    cd_credit_rating          CHAR(10) NOT NULL,
+--    cd_dep_count              INTEGER  NOT NULL,
+--    cd_dep_employed_count     INTEGER  NOT NULL,
+--    cd_dep_college_count      INTEGER  NOT NULL
+--);
+--
+--CREATE TABLE tpcds.customer
+--(
+--    c_customer_sk             INTEGER               NOT NULL,
+--    c_customer_id             CHAR(16)              NOT NULL,
+--    c_current_cdemo_sk        INTEGER                       ,
+--    c_current_hdemo_sk        INTEGER                       ,
+--    c_current_addr_sk         INTEGER                       ,
+--    c_first_shipto_date_sk    INTEGER                       ,
+--    c_first_sales_date_sk     INTEGER                       ,
+--    c_salutation              CHAR(10)                      ,
+--    c_first_name              CHAR(20)                      ,
+--    c_last_name               CHAR(30)                      ,
+--    c_preferred_cust_flag     CHAR(1)                       ,
+--    c_birth_day               INTEGER                       ,
+--    c_birth_month             INTEGER                       ,
+--    c_birth_year              INTEGER                       ,
+--    c_birth_country           VARCHAR(20)                   ,
+--    c_login                   CHAR(13)                      ,
+--    c_email_address           CHAR(50)                      ,
+--    c_last_review_date        CHAR(10)
+--    );
+--
+--CREATE TABLE tpcds.date_dim
+--(
+--    d_date_sk                 INTEGER   NOT NULL,
+--    d_date_id                 CHAR(16)  NOT NULL,
+--    d_date                    DATE      NOT NULL,
+--    d_month_seq               INTEGER   NOT NULL,
+--    d_week_seq                INTEGER   NOT NULL,
+--    d_quarter_seq             INTEGER   NOT NULL,
+--    d_year                    INTEGER   NOT NULL,
+--    d_dow                     INTEGER   NOT NULL,
+--    d_moy                     INTEGER   NOT NULL,
+--    d_dom                     INTEGER   NOT NULL,
+--    d_qoy                     INTEGER   NOT NULL,
+--    d_fy_year                 INTEGER   NOT NULL,
+--    d_fy_quarter_seq          INTEGER   NOT NULL,
+--    d_fy_week_seq             INTEGER   NOT NULL,
+--    d_day_name                CHAR(9)   NOT NULL,
+--    d_quarter_name            CHAR(6)   NOT NULL,
+--    d_holiday                 CHAR(1)   NOT NULL,
+--    d_weekend                 CHAR(1)   NOT NULL,
+--    d_following_holiday       CHAR(1)   NOT NULL,
+--    d_first_dom               INTEGER   NOT NULL,
+--    d_last_dom                INTEGER   NOT NULL,
+--    d_same_day_ly             INTEGER   NOT NULL,
+--    d_same_day_lq             INTEGER   NOT NULL,
+--    d_current_day             CHAR(1)   NOT NULL,
+--    d_current_week            CHAR(1)   NOT NULL,
+--    d_current_month           CHAR(1)   NOT NULL,
+--    d_current_quarter         CHAR(1)   NOT NULL,
+--    d_current_year            CHAR(1)   NOT NULL
+--);
+--
+--CREATE TABLE tpcds.household_demographics
+--(
+--    hd_demo_sk                INTEGER  NOT NULL,
+--    hd_income_band_sk         INTEGER  NOT NULL,
+--    hd_buy_potential          CHAR(15) NOT NULL,
+--    hd_dep_count              INTEGER  NOT NULL,
+--    hd_vehicle_count          INTEGER  NOT NULL
+--);
+--
+--CREATE TABLE tpcds.income_band
+--(
+--    ib_income_band_sk         INTEGER               NOT NULL,
+--    ib_lower_bound            INTEGER                       ,
+--    ib_upper_bound            INTEGER
+--);
+--
+--CREATE TABLE tpcds.inventory
+--(
+--    inv_item_sk               INTEGER               NOT NULL,
+--    inv_date_sk               INTEGER               NOT NULL,
+--    inv_warehouse_sk          INTEGER               NOT NULL,
+--    inv_quantity_on_hand      INTEGER
+--);
+--
+--CREATE TABLE tpcds.item
+--(
+--    i_item_sk                 INTEGER               NOT NULL,
+--    i_item_id                 CHAR(16)              NOT NULL,
+--    i_rec_start_date          DATE                          ,
+--    i_rec_end_date            DATE                          ,
+--    i_item_desc               VARCHAR(200)                  ,
+--    i_current_price           DECIMAL(7,2)                  ,
+--    i_wholesale_cost          DECIMAL(7,2)                  ,
+--    i_brand_id                INTEGER                       ,
+--    i_brand                   CHAR(50)                      ,
+--    i_class_id                INTEGER                       ,
+--    i_class                   CHAR(50)                      ,
+--    i_category_id             INTEGER                       ,
+--    i_category                CHAR(50)                      ,
+--    i_manufact_id             INTEGER                       ,
+--    i_manufact                CHAR(50)                      ,
+--    i_size                    CHAR(20)                      ,
+--    i_formulation             CHAR(20)                      ,
+--    i_color                   CHAR(20)                      ,
+--    i_units                   CHAR(10)                      ,
+--    i_container               CHAR(10)                      ,
+--    i_manager_id              INTEGER                       ,
+--    i_product_name            CHAR(50)
+--    );
+--
+--CREATE TABLE tpcds.promotion
+--(
+--    p_promo_sk                INTEGER               NOT NULL,
+--    p_promo_id                CHAR(16)              NOT NULL,
+--    p_start_date_sk           INTEGER                       ,
+--    p_end_date_sk             INTEGER                       ,
+--    p_item_sk                 INTEGER                       ,
+--    p_cost                    DECIMAL(15,2)                 ,
+--    p_response_target         INTEGER                       ,
+--    p_promo_name              CHAR(50)                      ,
+--    p_channel_dmail           CHAR(1)                       ,
+--    p_channel_email           CHAR(1)                       ,
+--    p_channel_catalog         CHAR(1)                       ,
+--    p_channel_tv              CHAR(1)                       ,
+--    p_channel_radio           CHAR(1)                       ,
+--    p_channel_press           CHAR(1)                       ,
+--    p_channel_event           CHAR(1)                       ,
+--    p_channel_demo            CHAR(1)                       ,
+--    p_channel_details         VARCHAR(100)                  ,
+--    p_purpose                 CHAR(15)                      ,
+--    p_discount_active         CHAR(1)
+--);
+--
+--CREATE TABLE tpcds.reason
+--(
+--    r_reason_sk               INTEGER               NOT NULL,
+--    r_reason_id               CHAR(16)              NOT NULL,
+--    r_reason_desc             CHAR(100)
+--);
+--
+--CREATE TABLE tpcds.ship_mode
+--(
+--    sm_ship_mode_sk           INTEGER               NOT NULL,
+--    sm_ship_mode_id           CHAR(16)              NOT NULL,
+--    sm_type                   CHAR(30)                      ,
+--    sm_code                   CHAR(10)                      ,
+--    sm_carrier                CHAR(20)                      ,
+--    sm_contract               CHAR(20)
+--);
+--
+--CREATE TABLE tpcds.store_returns
+--(
+--    sr_item_sk                INTEGER               NOT NULL,
+--    sr_ticket_number          INTEGER               NOT NULL,
+--    sr_returned_date_sk       INTEGER                       ,
+--    sr_return_time_sk         INTEGER                       ,
+--    sr_customer_sk            INTEGER                       ,
+--    sr_cdemo_sk               INTEGER                       ,
+--    sr_hdemo_sk               INTEGER                       ,
+--    sr_addr_sk                INTEGER                       ,
+--    sr_store_sk               INTEGER                       ,
+--    sr_reason_sk              INTEGER                       ,
+--    sr_return_quantity        INTEGER                       ,
+--    sr_return_amt             DECIMAL(7,2)                  ,
+--    sr_return_tax             DECIMAL(7,2)                  ,
+--    sr_return_amt_inc_tax     DECIMAL(7,2)                  ,
+--    sr_fee                    DECIMAL(7,2)                  ,
+--    sr_return_ship_cost       DECIMAL(7,2)                  ,
+--    sr_refunded_cash          DECIMAL(7,2)                  ,
+--    sr_reversed_charge        DECIMAL(7,2)                  ,
+--    sr_store_credit           DECIMAL(7,2)                  ,
+--    sr_net_loss               DECIMAL(7,2)
+--);
+--
+--CREATE TABLE tpcds.store_sales
+--(
+--    ss_item_sk                INTEGER               NOT NULL,
+--    ss_ticket_number          INTEGER               NOT NULL,
+--    ss_sold_date_sk           INTEGER                       ,
+--    ss_sold_time_sk           INTEGER                       ,
+--    ss_customer_sk            INTEGER                       ,
+--    ss_cdemo_sk               INTEGER                       ,
+--    ss_hdemo_sk               INTEGER                       ,
+--    ss_addr_sk                INTEGER                       ,
+--    ss_store_sk               INTEGER                       ,
+--    ss_promo_sk               INTEGER                       ,
+--    ss_quantity               INTEGER                       ,
+--    ss_wholesale_cost         DECIMAL(7,2)                  ,
+--    ss_list_price             DECIMAL(7,2)                  ,
+--    ss_sales_price            DECIMAL(7,2)                  ,
+--    ss_ext_discount_amt       DECIMAL(7,2)                  ,
+--    ss_ext_sales_price        DECIMAL(7,2)                  ,
+--    ss_ext_wholesale_cost     DECIMAL(7,2)                  ,
+--    ss_ext_list_price         DECIMAL(7,2)                  ,
+--    ss_ext_tax                DECIMAL(7,2)                  ,
+--    ss_coupon_amt             DECIMAL(7,2)                  ,
+--    ss_net_paid               DECIMAL(7,2)                  ,
+--    ss_net_paid_inc_tax       DECIMAL(7,2)                  ,
+--    ss_net_profit             DECIMAL(7,2)
+--);
+--
+--CREATE TABLE tpcds.store
+--(
+--    s_store_sk                INTEGER               NOT NULL,
+--    s_store_id                CHAR(16)              NOT NULL,
+--    s_rec_start_date          DATE                          ,
+--    s_rec_end_date            DATE                          ,
+--    s_closed_date_sk          INTEGER                       ,
+--    s_store_name              VARCHAR(50)                   ,
+--    s_number_employees        INTEGER                       ,
+--    s_floor_space             INTEGER                       ,
+--    s_hours                   CHAR(20)                      ,
+--    s_manager                 VARCHAR(40)                   ,
+--    s_market_id               INTEGER                       ,
+--    s_geography_class         VARCHAR(100)                  ,
+--    s_market_desc             VARCHAR(100)                  ,
+--    s_market_manager          VARCHAR(40)                   ,
+--    s_division_id             INTEGER                       ,
+--    s_division_name           VARCHAR(50)                   ,
+--    s_company_id              INTEGER                       ,
+--    s_company_name            VARCHAR(50)                   ,
+--    s_street_number           VARCHAR(10)                   ,
+--    s_street_name             VARCHAR(60)                   ,
+--    s_street_type             CHAR(15)                      ,
+--    s_suite_number            CHAR(10)                      ,
+--    s_city                    VARCHAR(60)                   ,
+--    s_county                  VARCHAR(30)                   ,
+--    s_state                   CHAR(2)                       ,
+--    s_zip                     CHAR(10)                      ,
+--    s_country                 VARCHAR(20)                   ,
+--    s_gmt_offset              DECIMAL(5,2)                  ,
+--    s_tax_precentage          DECIMAL(5,2)
+--    );
+--
+--CREATE TABLE tpcds.time_dim
+--(
+--    t_time_sk                 INTEGER               NOT NULL,
+--    t_time_id                 CHAR(16)              NOT NULL,
+--    t_time                    INTEGER               NOT NULL,
+--    t_hour                    INTEGER               NOT NULL,
+--    t_minute                  INTEGER               NOT NULL,
+--    t_second                  INTEGER               NOT NULL,
+--    t_am_pm                   CHAR(2)               NOT NULL,
+--    t_shift                   CHAR(20)              NOT NULL,
+--    t_sub_shift               CHAR(20)              NOT NULL,
+--    t_meal_time               CHAR(20)
+--);
+--
+--CREATE TABLE tpcds.warehouse
+--(
+--    w_warehouse_sk            INTEGER               NOT NULL,
+--    w_warehouse_id            CHAR(16)              NOT NULL,
+--    w_warehouse_name          VARCHAR(20)                   ,
+--    w_warehouse_sq_ft         INTEGER                       ,
+--    w_street_number           CHAR(10)                      ,
+--    w_street_name             VARCHAR(60)                   ,
+--    w_street_type             CHAR(15)                      ,
+--    w_suite_number            CHAR(10)                      ,
+--    w_city                    VARCHAR(60)                   ,
+--    w_county                  VARCHAR(30)                   ,
+--    w_state                   CHAR(2)                       ,
+--    w_zip                     CHAR(10)                      ,
+--    w_country                 VARCHAR(20)                   ,
+--    w_gmt_offset              DECIMAL(5,2)
+--);
+--
+--CREATE TABLE tpcds.web_page
+--(
+--    wp_web_page_sk            INTEGER               NOT NULL,
+--    wp_web_page_id            CHAR(16)              NOT NULL,
+--    wp_rec_start_date         DATE                          ,
+--    wp_rec_end_date           DATE                          ,
+--    wp_creation_date_sk       INTEGER                       ,
+--    wp_access_date_sk         INTEGER                       ,
+--    wp_autogen_flag           CHAR(1)                       ,
+--    wp_customer_sk            INTEGER                       ,
+--    wp_url                    VARCHAR(100)                  ,
+--    wp_type                   CHAR(50)                      ,
+--    wp_char_count             INTEGER                       ,
+--    wp_link_count             INTEGER                       ,
+--    wp_image_count            INTEGER                       ,
+--    wp_max_ad_count           INTEGER
+--);
+--
+--CREATE TABLE tpcds.web_returns
+--(
+--    wr_item_sk                INTEGER               NOT NULL,
+--    wr_order_number           INTEGER               NOT NULL,
+--    wr_returned_date_sk       INTEGER                       ,
+--    wr_returned_time_sk       INTEGER                       ,
+--    wr_refunded_customer_sk   INTEGER                       ,
+--    wr_refunded_cdemo_sk      INTEGER                       ,
+--    wr_refunded_hdemo_sk      INTEGER                       ,
+--    wr_refunded_addr_sk       INTEGER                       ,
+--    wr_returning_customer_sk  INTEGER                       ,
+--    wr_returning_cdemo_sk     INTEGER                       ,
+--    wr_returning_hdemo_sk     INTEGER                       ,
+--    wr_returning_addr_sk      INTEGER                       ,
+--    wr_web_page_sk            INTEGER                       ,
+--    wr_reason_sk              INTEGER                       ,
+--    wr_return_quantity        INTEGER                       ,
+--    wr_return_amt             DECIMAL(7,2)                  ,
+--    wr_return_tax             DECIMAL(7,2)                  ,
+--    wr_return_amt_inc_tax     DECIMAL(7,2)                  ,
+--    wr_fee                    DECIMAL(7,2)                  ,
+--    wr_return_ship_cost       DECIMAL(7,2)                  ,
+--    wr_refunded_cash          DECIMAL(7,2)                  ,
+--    wr_reversed_charge        DECIMAL(7,2)                  ,
+--    wr_account_credit         DECIMAL(7,2)                  ,
+--    wr_net_loss               DECIMAL(7,2)
+--);
+--
+--CREATE TABLE tpcds.web_sales
+--(
+--    ws_item_sk                INTEGER               NOT NULL,
+--    ws_order_number           INTEGER               NOT NULL,
+--    ws_sold_date_sk           INTEGER                       ,
+--    ws_sold_time_sk           INTEGER                       ,
+--    ws_ship_date_sk           INTEGER                       ,
+--    ws_bill_customer_sk       INTEGER                       ,
+--    ws_bill_cdemo_sk          INTEGER                       ,
+--    ws_bill_hdemo_sk          INTEGER                       ,
+--    ws_bill_addr_sk           INTEGER                       ,
+--    ws_ship_customer_sk       INTEGER                       ,
+--    ws_ship_cdemo_sk          INTEGER                       ,
+--    ws_ship_hdemo_sk          INTEGER                       ,
+--    ws_ship_addr_sk           INTEGER                       ,
+--    ws_web_page_sk            INTEGER                       ,
+--    ws_web_site_sk            INTEGER                       ,
+--    ws_ship_mode_sk           INTEGER                       ,
+--    ws_warehouse_sk           INTEGER                       ,
+--    ws_promo_sk               INTEGER                       ,
+--    ws_quantity               INTEGER                       ,
+--    ws_wholesale_cost         DECIMAL(7,2)                  ,
+--    ws_list_price             DECIMAL(7,2)                  ,
+--    ws_sales_price            DECIMAL(7,2)                  ,
+--    ws_ext_discount_amt       DECIMAL(7,2)                  ,
+--    ws_ext_sales_price        DECIMAL(7,2)                  ,
+--    ws_ext_wholesale_cost     DECIMAL(7,2)                  ,
+--    ws_ext_list_price         DECIMAL(7,2)                  ,
+--    ws_ext_tax                DECIMAL(7,2)                  ,
+--    ws_coupon_amt             DECIMAL(7,2)                  ,
+--    ws_ext_ship_cost          DECIMAL(7,2)                  ,
+--    ws_net_paid               DECIMAL(7,2)                  ,
+--    ws_net_paid_inc_tax       DECIMAL(7,2)                  ,
+--    ws_net_paid_inc_ship      DECIMAL(7,2)                  ,
+--    ws_net_paid_inc_ship_tax  DECIMAL(7,2)                  ,
+--    ws_net_profit             DECIMAL(7,2)
+--);
+--
+--CREATE TABLE tpcds.web_site
+--(
+--    web_site_sk               INTEGER               NOT NULL,
+--    web_site_id               CHAR(16)              NOT NULL,
+--    web_rec_start_date        DATE                          ,
+--    web_rec_end_date          DATE                          ,
+--    web_name                  VARCHAR(50)                   ,
+--    web_open_date_sk          INTEGER                       ,
+--    web_close_date_sk         INTEGER                       ,
+--    web_class                 VARCHAR(50)                   ,
+--    web_manager               VARCHAR(40)                   ,
+--    web_mkt_id                INTEGER                       ,
+--    web_mkt_class             VARCHAR(50)                   ,
+--    web_mkt_desc              VARCHAR(100)                  ,
+--    web_market_manager        VARCHAR(40)                   ,
+--    web_company_id            INTEGER                       ,
+--    web_company_name          CHAR(50)                      ,
+--    web_street_number         CHAR(10)                      ,
+--    web_street_name           VARCHAR(60)                   ,
+--    web_street_type           CHAR(15)                      ,
+--    web_suite_number          CHAR(10)                      ,
+--    web_city                  VARCHAR(60)                   ,
+--    web_county                VARCHAR(30)                   ,
+--    web_state                 CHAR(2)                       ,
+--    web_zip                   CHAR(10)                      ,
+--    web_country               VARCHAR(20)                   ,
+--    web_gmt_offset            DECIMAL(5,2)                  ,
+--    web_tax_percentage        DECIMAL(5,2)
+--);
+--
+--SELECT * FROM v_catalog.schemata
+--WHERE schema_name = 'tpcds';
+--
+--SELECT * from tables
+--WHERE table_schema ='tpcds';
+--
+--
+--COPY tpcds.call_center FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/call_center_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/call_center_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/call_center_exceptions.txt';
+--
+--COPY tpcds.catalog_page FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/catalog_page_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/catalog_page_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/catalog_page_exceptions.txt';
+--
+--COPY tpcds.catalog_returns FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/catalog_returns_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/catalog_returns_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/catalog_returns_exceptions.txt';
+--
+--COPY tpcds.catalog_sales FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/catalog_sales_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/catalog_sales_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/catalog_sales_exceptions.txt';
+--
+--COPY tpcds.customer_address FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/customer_address_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/customer_address_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/customer_address_exceptions.txt';
+--
+--COPY tpcds.customer_demographics FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/customer_demographics_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/customer_demographics_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/customer_demographics_exceptions.txt';
+--
+--COPY customer FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/customer_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/customer_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/customer_exceptions.txt';
+--
+--COPY tpcds.date_dim FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/date_dim_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/date_dim_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/date_dim_exceptions.txt';
+--
+--COPY tpcds.household_demographics FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/household_demographics_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/household_demographics_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/household_demographics_exceptions.txt';
+--
+--COPY tpcds.income_band FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/income_band_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/income_band_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/income_band_exceptions.txt';
+--
+--COPY tpcds.inventory FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/inventory_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/inventory_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/inventory_exceptions.txt';
+--
+--COPY tpcds.item FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/item_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/item_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/item_exceptions.txt';
+--
+--COPY tpcds.promotion FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/promotion_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/promotion_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/promotion_exceptions.txt';
+--
+--COPY tpcds.reason FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/reason_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/reason_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/reason_exceptions.txt';
+--
+--COPY tpcds.ship_mode FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/ship_mode_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/ship_mode_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/ship_mode_exceptions.txt';
+--
+--COPY tpcds.store_returns FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/store_returns_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/store_returns_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/store_returns_exceptions.txt';
+--
+--COPY tpcds.store_sales FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/store_sales_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/store_sales_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/store_sales_exceptions.txt';
+--
+--COPY tpcds.store FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/store_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/store_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/store_exceptions.txt';
+--
+--COPY tpcds.time_dim FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/time_dim_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/time_dim_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/time_dim_exceptions.txt';
+--
+--SELECT * FROM tpcds.time_dim td
+--order by 1;
+--
+--COPY tpcds.warehouse FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/warehouse_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/warehouse_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/warehouse_exceptions.txt';
+--
+--SELECT * FROM tpcds.warehouse w 
+--order by 1;
+----
+--COPY tpcds.web_page FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_page_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_page_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/web_page_exceptions.txt';
+----
+--COPY tpcds.web_returns FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_returns_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_returns_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/web_returns_exceptions.txt';
+----
+--COPY tpcds.web_sales FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_sales_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_sales_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/web_sales_exceptions.txt';
+----
+--COPY tpcds.web_site FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_site_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_site_rejected.txt'
+--EXCEPTIONS '/home/dbadmin/tpcds-benchmark/rejected/web_site_exceptions.txt';
+
+
+
+
+-- 1) call_center
+--COPY tpcds.call_center (
+--  cc_call_center_sk, cc_call_center_id, cc_rec_start_date, cc_rec_end_date, cc_closed_date_sk, cc_open_date_sk, cc_name, cc_class, cc_employees, cc_sq_ft, cc_hours, cc_manager, cc_mkt_id, cc_mkt_class, cc_mkt_desc, cc_market_manager, cc_division, cc_division_name, cc_company, cc_company_name, cc_street_number, cc_street_name, cc_street_type, cc_suite_number, cc_city, cc_county, cc_state, cc_zip, cc_country, cc_gmt_offset, cc_tax_percentage
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/call_center_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/call_center_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/call_center_exceptions.txt';
+--
+--
+-- 2) catalog_page
+--COPY tpcds.catalog_page (
+--  cp_catalog_page_sk,
+--  cp_catalog_page_id,
+--  cp_start_date_sk,
+--  cp_end_date_sk,
+--  cp_department,
+--  cp_catalog_number,
+--  cp_catalog_page_number,
+--  cp_description,
+--  cp_type
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/catalog_page_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/catalog_page_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/catalog_page_exceptions.txt';
+--
+--
+--
+-- 3) catalog_returns
+--COPY tpcds.catalog_returns (
+--  cr_returned_date_sk,cr_returned_time_sk,cr_item_sk,cr_refunded_customer_sk,cr_refunded_cdemo_sk,cr_refunded_hdemo_sk,cr_refunded_addr_sk,cr_returning_customer_sk,cr_returning_cdemo_sk,cr_returning_hdemo_sk,cr_returning_addr_sk,cr_call_center_sk,cr_catalog_page_sk,cr_ship_mode_sk,cr_warehouse_sk,cr_reason_sk,cr_order_number,cr_return_quantity, cr_return_amount, cr_return_tax, cr_return_amt_inc_tax, cr_fee, cr_return_ship_cost, cr_refunded_cash, cr_reversed_charge, cr_store_credit, cr_net_loss
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/catalog_returns_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/catalog_returns_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/catalog_returns_exceptions.txt';
+--SELECT * from tpcds.catalog_returns cr
+--WHERE cr_item_sk =9 and cr_order_number =15991661;
+--
+-- 4) catalog_sales
+--COPY tpcds.catalog_sales (
+-- cs_sold_date_sk,
+--cs_sold_time_sk,
+--cs_ship_date_sk,
+--cs_bill_customer_sk,
+--cs_bill_cdemo_sk,
+--cs_bill_hdemo_sk,
+--cs_bill_addr_sk,
+--cs_ship_customer_sk,
+--cs_ship_cdemo_sk,
+--cs_ship_hdemo_sk,
+--cs_ship_addr_sk,
+--cs_call_center_sk,
+--cs_catalog_page_sk,
+--cs_ship_mode_sk,
+--cs_warehouse_sk,
+--cs_item_sk,
+--cs_promo_sk,
+--cs_order_number,
+--cs_quantity,
+--cs_wholesale_cost,
+--cs_list_price,
+--cs_sales_price,
+--cs_ext_discount_amt,
+--cs_ext_sales_price,
+--cs_ext_wholesale_cost,
+--cs_ext_list_price,
+--cs_ext_tax,
+--cs_coupon_amt,
+--cs_ext_ship_cost,
+--cs_net_paid,
+--cs_net_paid_inc_tax,
+--cs_net_paid_inc_ship,
+--cs_net_paid_inc_ship_tax,
+--cs_net_profit
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/catalog_sales_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/catalog_sales_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/catalog_sales_exceptions.txt';
+--
+-- 5) customer_address
+--COPY tpcds.customer_address (
+--  ca_address_sk,
+--  ca_address_id,
+--  ca_street_number,
+--  ca_street_name,
+--  ca_street_type,
+--  ca_suite_number,
+--  ca_city,
+--  ca_county,
+--  ca_state,
+--  ca_zip,
+--  ca_country,
+--  ca_gmt_offset,
+--  ca_location_type
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/customer_address_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/customer_address_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/customer_address_exceptions.txt';
+--
+-- 6) customer_demographics
+--COPY tpcds.customer_demographics (
+--  cd_demo_sk,
+--  cd_gender,
+--  cd_marital_status,
+--  cd_education_status,
+--  cd_purchase_estimate,
+--  cd_credit_rating,
+--  cd_dep_count,
+--  cd_dep_employed_count,
+--  cd_dep_college_count
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/customer_demographics_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/customer_demographics_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/customer_demographics_exceptions.txt';
+--
+-- 7) customer
+--COPY tpcds.customer (
+--  c_customer_sk,
+--  c_customer_id,
+--  c_current_cdemo_sk,
+--  c_current_hdemo_sk,
+--  c_current_addr_sk,
+--  c_first_shipto_date_sk,
+--  c_first_sales_date_sk,
+--  c_salutation,
+--  c_first_name,
+--  c_last_name,
+--  c_preferred_cust_flag,
+--  c_birth_day,
+--  c_birth_month,
+--  c_birth_year,
+--  c_birth_country,
+--  c_login,
+--  c_email_address,
+--  c_last_review_date
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/customer_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/customer_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/customer_exceptions.txt';
+--
+-- 8) date_dim
+--COPY tpcds.date_dim (
+--  d_date_sk,
+--  d_date_id,
+--  d_date,
+--  d_month_seq,
+--  d_week_seq,
+--  d_quarter_seq,
+--  d_year,
+--  d_dow,
+--  d_moy,
+--  d_dom,
+--  d_qoy,
+--  d_fy_year,
+--  d_fy_quarter_seq,
+--  d_fy_week_seq,
+--  d_day_name,
+--  d_quarter_name,
+--  d_holiday,
+--  d_weekend,
+--  d_following_holiday,
+--  d_first_dom,
+--  d_last_dom,
+--  d_same_day_ly,
+--  d_same_day_lq,
+--  d_current_day,
+--  d_current_week,
+--  d_current_month,
+--  d_current_quarter,
+--  d_current_year
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/date_dim_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/date_dim_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/date_dim_exceptions.txt';
+--
+-- 9) household_demographics
+--COPY tpcds.household_demographics (
+--  hd_demo_sk,
+--  hd_income_band_sk,
+--  hd_buy_potential,
+--  hd_dep_count,
+--  hd_vehicle_count
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/household_demographics_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/household_demographics_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/household_demographics_exceptions.txt';
+--
+-- 10) income_band
+--COPY tpcds.income_band (
+--  ib_income_band_sk,
+--  ib_lower_bound,
+--  ib_upper_bound
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/income_band_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/income_band_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/income_band_exceptions.txt';
+--
+-- 11) inventory
+--COPY tpcds.inventory (
+--  inv_date_sk,
+--  inv_item_sk,
+--  inv_warehouse_sk,
+--  inv_quantity_on_hand
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/inventory_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/inventory_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/inventory_exceptions.txt';
+--
+-- 12) item
+--COPY tpcds.item (
+--  i_item_sk,
+--  i_item_id,
+--  i_rec_start_date,
+--  i_rec_end_date,
+--  i_item_desc,
+--  i_current_price,
+--  i_wholesale_cost,
+--  i_brand_id,
+--  i_brand,
+--  i_class_id,
+--  i_class,
+--  i_category_id,
+--  i_category,
+--  i_manufact_id,
+--  i_manufact,
+--  i_size,
+--  i_formulation,
+--  i_color,
+--  i_units,
+--  i_container,
+--  i_manager_id,
+--  i_product_name
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/item_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/item_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/item_exceptions.txt';
+--
+-- 13) promotion
+--COPY tpcds.promotion (
+--  p_promo_sk,
+--  p_promo_id,
+--  p_start_date_sk,
+--  p_end_date_sk,
+--  p_item_sk,
+--  p_cost,
+--  p_response_target,
+--  p_promo_name,
+--  p_channel_dmail,
+--  p_channel_email,
+--  p_channel_catalog,
+--  p_channel_tv,
+--  p_channel_radio,
+--  p_channel_press,
+--  p_channel_event,
+--  p_channel_demo,
+--  p_channel_details,
+--  p_purpose,
+--  p_discount_active
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/promotion_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/promotion_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/promotion_exceptions.txt';
+--
+-- 14) reason
+--COPY tpcds.reason (
+--  r_reason_sk,
+--  r_reason_id,
+--  r_reason_desc
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/reason_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/reason_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/reason_exceptions.txt';
+--
+-- 15) ship_mode
+--COPY tpcds.ship_mode (
+--  sm_ship_mode_sk,
+--  sm_ship_mode_id,
+--  sm_type,
+--  sm_code,
+--  sm_carrier,
+--  sm_contract
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/ship_mode_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/ship_mode_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/ship_mode_exceptions.txt';
+--
+-- 16) store_returns
+--COPY tpcds.store_returns (
+--sr_returned_date_sk,
+--sr_return_time_sk,
+--sr_item_sk,
+--sr_customer_sk,
+--sr_cdemo_sk,
+--sr_hdemo_sk,
+--sr_addr_sk,
+--sr_store_sk,
+--sr_reason_sk,
+--sr_ticket_number,
+--sr_return_quantity,
+--sr_return_amt,
+--sr_return_tax,
+--sr_return_amt_inc_tax,
+--sr_fee,
+--sr_return_ship_cost,
+--sr_refunded_cash,
+--sr_reversed_charge,
+--sr_store_credit,
+--sr_net_loss
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/store_returns_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/store_returns_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/store_returns_exceptions.txt';
+--
+-- 17) store_sales
+--COPY tpcds.store_sales (
+--  ss_sold_date_sk,
+--ss_sold_time_sk,
+--ss_item_sk,
+--ss_customer_sk,
+--ss_cdemo_sk,
+--ss_hdemo_sk,
+--ss_addr_sk,
+--ss_store_sk,
+--ss_promo_sk,
+--ss_ticket_number,
+--ss_quantity,
+--ss_wholesale_cost,
+--ss_list_price,
+--ss_sales_price,
+--ss_ext_discount_amt,
+--ss_ext_sales_price,
+--ss_ext_wholesale_cost,
+--ss_ext_list_price,
+--ss_ext_tax,
+--ss_coupon_amt,
+--ss_net_paid,
+--ss_net_paid_inc_tax,
+--ss_net_profit
+--
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/store_sales_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/store_sales_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/store_sales_exceptions.txt';
+--
+-- 18) store
+--COPY tpcds.store (
+--  s_store_sk,
+--  s_store_id,
+--  s_rec_start_date,
+--  s_rec_end_date,
+--  s_closed_date_sk,
+--  s_store_name,
+--  s_number_employees,
+--  s_floor_space,
+--  s_hours,
+--  s_manager,
+--  s_market_id,
+--  s_geography_class,
+--  s_market_desc,
+--  s_market_manager,
+--  s_division_id,
+--  s_division_name,
+--  s_company_id,
+--  s_company_name,
+--  s_street_number,
+--  s_street_name,
+--  s_street_type,
+--  s_suite_number,
+--  s_city,
+--  s_county,
+--  s_state,
+--  s_zip,
+--  s_country,
+--  s_gmt_offset,
+--  s_tax_precentage
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/store_[0-9]*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/store_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/store_exceptions.txt';
+--
+-- 19) time_dim
+--COPY tpcds.time_dim (
+--  t_time_sk,
+--  t_time_id,
+--  t_time,
+--  t_hour,
+--  t_minute,
+--  t_second,
+--  t_am_pm,
+--  t_shift,
+--  t_sub_shift,
+--  t_meal_time
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/time_dim_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/time_dim_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/time_dim_exceptions.txt';
+--
+-- 20) warehouse
+--COPY tpcds.warehouse (
+--  w_warehouse_sk,
+--  w_warehouse_id,
+--  w_warehouse_name,
+--  w_warehouse_sq_ft,
+--  w_street_number,
+--  w_street_name,
+--  w_street_type,
+--  w_suite_number,
+--  w_city,
+--  w_county,
+--  w_state,
+--  w_zip,
+--  w_country,
+--  w_gmt_offset
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/warehouse_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/warehouse_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/warehouse_exceptions.txt';
+--
+-- 21) web_page
+--COPY tpcds.web_page (
+--  wp_web_page_sk,
+--  wp_web_page_id,
+--  wp_rec_start_date,
+--  wp_rec_end_date,
+--  wp_creation_date_sk,
+--  wp_access_date_sk,
+--  wp_autogen_flag,
+--  wp_customer_sk,
+--  wp_url,
+--  wp_type,
+--  wp_char_count,
+--  wp_link_count,
+--  wp_image_count,
+--  wp_max_ad_count
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_page_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_page_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/web_page_exceptions.txt';
+--
+-- 22) web_returns
+--COPY tpcds.web_returns (
+--  wr_returned_date_sk,
+--wr_returned_time_sk,
+--wr_item_sk,
+--wr_refunded_customer_sk,
+--wr_refunded_cdemo_sk,
+--wr_refunded_hdemo_sk,
+--wr_refunded_addr_sk,
+--wr_returning_customer_sk,
+--wr_returning_cdemo_sk,
+--wr_returning_hdemo_sk,
+--wr_returning_addr_sk,
+--wr_web_page_sk,
+--wr_reason_sk,
+--wr_order_number,
+--wr_return_quantity,
+--wr_return_amt,
+--wr_return_tax,
+--wr_return_amt_inc_tax,
+--wr_fee,
+--wr_return_ship_cost,
+--wr_refunded_cash,
+--wr_reversed_charge,
+--wr_account_credit,
+--wr_net_loss
+--
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_returns_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_returns_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/web_returns_exceptions.txt';
+--
+-- 23) web_sales
+--COPY tpcds.web_sales (
+--  ws_sold_date_sk,
+--ws_sold_time_sk,
+--ws_ship_date_sk,
+--ws_item_sk,
+--ws_bill_customer_sk,
+--ws_bill_cdemo_sk,
+--ws_bill_hdemo_sk,
+--ws_bill_addr_sk,
+--ws_ship_customer_sk,
+--ws_ship_cdemo_sk,
+--ws_ship_hdemo_sk,
+--ws_ship_addr_sk,
+--ws_web_page_sk,
+--ws_web_site_sk,
+--ws_ship_mode_sk,
+--ws_warehouse_sk,
+--ws_promo_sk,
+--ws_order_number,
+--ws_quantity,
+--ws_wholesale_cost,
+--ws_list_price,
+--ws_sales_price,
+--ws_ext_discount_amt,
+--ws_ext_sales_price,
+--ws_ext_wholesale_cost,
+--ws_ext_list_price,
+--ws_ext_tax,
+--ws_coupon_amt,
+--ws_ext_ship_cost,
+--ws_net_paid,
+--ws_net_paid_inc_tax,
+--ws_net_paid_inc_ship,
+--ws_net_paid_inc_ship_tax,
+--ws_net_profit
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_sales_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_sales_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/web_sales_exceptions.txt';
+--
+-- 24) web_site
+--COPY tpcds.web_site (
+--  web_site_sk,
+--  web_site_id,
+--  web_rec_start_date,
+--  web_rec_end_date,
+--  web_name,
+--  web_open_date_sk,
+--  web_close_date_sk,
+--  web_class,
+--  web_manager,
+--  web_mkt_id,
+--  web_mkt_class,
+--  web_mkt_desc,
+--  web_market_manager,
+--  web_company_id,
+--  web_company_name,
+--  web_street_number,
+--  web_street_name,
+--  web_street_type,
+--  web_suite_number,
+--  web_city,
+--  web_county,
+--  web_state,
+--  web_zip,
+--  web_country,
+--  web_gmt_offset,
+--  web_tax_percentage
+--)
+--FROM LOCAL '/home/dbadmin/tpcds-benchmark/data_100/web_site_*.dat'
+--DELIMITER '|' NULL '\N' DIRECT
+--REJECTED DATA '/home/dbadmin/tpcds-benchmark/rejected/web_site_rejected.txt'
+--EXCEPTIONS   '/home/dbadmin/tpcds-benchmark/rejected/web_site_exceptions.txt';
+--
+--
+--
+
+
+
+
+SELECT 'call_center' AS table_name, COUNT(*) AS row_count FROM tpcds.call_center
+UNION ALL
+SELECT 'catalog_page', COUNT(*) FROM tpcds.catalog_page
+UNION ALL
+SELECT 'catalog_returns', COUNT(*) FROM tpcds.catalog_returns
+UNION ALL
+SELECT 'catalog_sales', COUNT(*) FROM tpcds.catalog_sales
+UNION ALL
+SELECT 'customer', COUNT(*) FROM tpcds.customer
+UNION ALL
+SELECT 'customer_address', COUNT(*) FROM tpcds.customer_address
+UNION ALL
+SELECT 'customer_demographics', COUNT(*) FROM tpcds.customer_demographics
+UNION ALL
+SELECT 'date_dim', COUNT(*) FROM tpcds.date_dim
+UNION ALL
+SELECT 'household_demographics', COUNT(*) FROM tpcds.household_demographics
+UNION ALL
+SELECT 'income_band', COUNT(*) FROM tpcds.income_band
+UNION ALL
+SELECT 'inventory', COUNT(*) FROM tpcds.inventory
+UNION ALL
+SELECT 'item', COUNT(*) FROM tpcds.item
+UNION ALL
+SELECT 'promotion', COUNT(*) FROM tpcds.promotion
+UNION ALL
+SELECT 'reason', COUNT(*) FROM tpcds.reason
+UNION ALL
+SELECT 'ship_mode', COUNT(*) FROM tpcds.ship_mode
+UNION ALL
+SELECT 'store', COUNT(*) FROM tpcds.store
+UNION ALL
+SELECT 'store_returns', COUNT(*) FROM tpcds.store_returns
+UNION ALL
+SELECT 'store_sales', COUNT(*) FROM tpcds.store_sales
+UNION ALL
+SELECT 'time_dim', COUNT(*) FROM tpcds.time_dim
+UNION ALL
+SELECT 'warehouse', COUNT(*) FROM tpcds.warehouse
+UNION ALL
+SELECT 'web_page', COUNT(*) FROM tpcds.web_page
+UNION ALL
+SELECT 'web_returns', COUNT(*) FROM tpcds.web_returns
+UNION ALL
+SELECT 'web_sales', COUNT(*) FROM tpcds.web_sales
+UNION ALL
+SELECT 'web_site', COUNT(*) FROM tpcds.web_site
+ORDER BY table_name;
+
+ SELECT
+        query_duration_us 
+    FROM 
+        v_monitor.query_profiles 
+    WHERE 
+        transaction_id=45035996275434699 AND 
+        statement_id=2
+    ;
+   
+ SELECT 
+   
+   
+   
+SET SEARCH_PATH TO tpcds;
+
+
+select 
+  c_last_name,c_first_name,substr(s_city,1,30),ss_ticket_number,amt,profit
+  from
+   (select ss_ticket_number
+          ,ss_customer_sk
+          ,store.s_city
+          ,sum(ss_coupon_amt) amt
+          ,sum(ss_net_profit) profit
+    from tpcds.store_sales,
+         tpcds.date_dim,
+         tpcds.store,
+         tpcds.household_demographics
+    where store_sales.ss_sold_date_sk = date_dim.d_date_sk
+    and store_sales.ss_store_sk = store.s_store_sk  
+    and store_sales.ss_hdemo_sk = household_demographics.hd_demo_sk
+    and (household_demographics.hd_dep_count = 6 or household_demographics.hd_vehicle_count > 2)
+    and date_dim.d_dow = 1
+    and date_dim.d_year in (1999,1999+1,1999+2) 
+    and store.s_number_employees between 200 and 295
+    group by ss_ticket_number,ss_customer_sk,ss_addr_sk,store.s_city) ms, tpcds.customer
+    where ss_customer_sk = c_customer_sk
+ order by c_last_name --desc
+ ,c_first_name --desc
+ ,substr(s_city,1,30) --desc
+ , profit
+limit 100;
+
+
+
+

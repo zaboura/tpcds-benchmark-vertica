@@ -1,0 +1,238 @@
+
+select mark_design_ksafe(1);
+
+CREATE PROJECTION tpcds.store_DBD_18_rep_MC_TPCDS_COMP /*+createtype(D)*/ 
+(
+ s_store_sk ENCODING COMMONDELTA_COMP,
+ s_store_id ENCODING ZSTD_FAST_COMP,
+ s_rec_start_date ENCODING ZSTD_FAST_COMP,
+ s_rec_end_date ENCODING ZSTD_FAST_COMP,
+ s_closed_date_sk ENCODING ZSTD_FAST_COMP,
+ s_store_name ENCODING ZSTD_FAST_COMP,
+ s_number_employees ENCODING DELTAVAL,
+ s_floor_space ENCODING ZSTD_FAST_COMP,
+ s_hours ENCODING ZSTD_FAST_COMP,
+ s_manager ENCODING ZSTD_FAST_COMP,
+ s_market_id ENCODING DELTAVAL,
+ s_geography_class ENCODING RLE,
+ s_market_desc ENCODING ZSTD_FAST_COMP,
+ s_market_manager ENCODING ZSTD_FAST_COMP,
+ s_division_id ENCODING RLE,
+ s_division_name ENCODING RLE,
+ s_company_id ENCODING RLE,
+ s_company_name ENCODING RLE,
+ s_street_number ENCODING ZSTD_FAST_COMP,
+ s_street_name ENCODING ZSTD_FAST_COMP,
+ s_street_type ENCODING ZSTD_FAST_COMP,
+ s_suite_number ENCODING ZSTD_FAST_COMP,
+ s_city ENCODING ZSTD_FAST_COMP,
+ s_county ENCODING ZSTD_FAST_COMP,
+ s_state ENCODING ZSTD_FAST_COMP,
+ s_zip ENCODING ZSTD_FAST_COMP,
+ s_country ENCODING RLE,
+ s_gmt_offset ENCODING BLOCKDICT_COMP,
+ s_tax_precentage ENCODING DELTAVAL
+)
+AS
+ SELECT store.s_store_sk,
+        store.s_store_id,
+        store.s_rec_start_date,
+        store.s_rec_end_date,
+        store.s_closed_date_sk,
+        store.s_store_name,
+        store.s_number_employees,
+        store.s_floor_space,
+        store.s_hours,
+        store.s_manager,
+        store.s_market_id,
+        store.s_geography_class,
+        store.s_market_desc,
+        store.s_market_manager,
+        store.s_division_id,
+        store.s_division_name,
+        store.s_company_id,
+        store.s_company_name,
+        store.s_street_number,
+        store.s_street_name,
+        store.s_street_type,
+        store.s_suite_number,
+        store.s_city,
+        store.s_county,
+        store.s_state,
+        store.s_zip,
+        store.s_country,
+        store.s_gmt_offset,
+        store.s_tax_precentage
+ FROM tpcds.store
+ ORDER BY store.s_geography_class,
+          store.s_division_id,
+          store.s_division_name,
+          store.s_company_id,
+          store.s_company_name,
+          store.s_country,
+          store.s_store_sk
+UNSEGMENTED ALL NODES;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.date_dim_DBD_2_rep_DBD_TPCDS_INC /*+createtype(D)*/ 
+(
+ d_date_sk ENCODING COMMONDELTA_COMP,
+ d_month_seq ENCODING COMMONDELTA_COMP,
+ d_year ENCODING RLE,
+ d_moy ENCODING RLE
+)
+AS
+ SELECT date_dim.d_date_sk,
+        date_dim.d_month_seq,
+        date_dim.d_year,
+        date_dim.d_moy
+ FROM tpcds.date_dim
+ ORDER BY date_dim.d_year,
+          date_dim.d_moy,
+          date_dim.d_date_sk
+UNSEGMENTED ALL NODES;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.date_dim_DBD_5_seg_DBD_TPCDS_INC_b0 /*+basename(date_dim_DBD_5_seg_DBD_TPCDS_INC),createtype(D)*/ 
+(
+ d_date_sk ENCODING COMMONDELTA_COMP,
+ d_date ENCODING COMMONDELTA_COMP
+)
+AS
+ SELECT date_dim.d_date_sk,
+        date_dim.d_date
+ FROM tpcds.date_dim
+ ORDER BY date_dim.d_date_sk
+SEGMENTED BY hash(date_dim.d_date_sk) ALL NODES OFFSET 0;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.date_dim_DBD_5_seg_DBD_TPCDS_INC_b1 /*+basename(date_dim_DBD_5_seg_DBD_TPCDS_INC),createtype(D)*/ 
+(
+ d_date_sk ENCODING COMMONDELTA_COMP,
+ d_date ENCODING COMMONDELTA_COMP
+)
+AS
+ SELECT date_dim.d_date_sk,
+        date_dim.d_date
+ FROM tpcds.date_dim
+ ORDER BY date_dim.d_date_sk
+SEGMENTED BY hash(date_dim.d_date_sk) ALL NODES OFFSET 1;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.store_sales_DBD_4_seg_DBD_TPCDS_INC_v1_b0 /*+basename(store_sales_DBD_4_seg_DBD_TPCDS_INC_v1),createtype(D)*/ 
+(
+ ss_item_sk ENCODING GCDDELTA,
+ ss_ticket_number ENCODING DELTAVAL,
+ ss_sold_date_sk ENCODING RLE,
+ ss_customer_sk ENCODING DELTAVAL,
+ ss_store_sk ENCODING RLE,
+ ss_quantity ENCODING RLE
+)
+AS
+ SELECT store_sales.ss_item_sk,
+        store_sales.ss_ticket_number,
+        store_sales.ss_sold_date_sk,
+        store_sales.ss_customer_sk,
+        store_sales.ss_store_sk,
+        store_sales.ss_quantity
+ FROM tpcds.store_sales
+ ORDER BY store_sales.ss_sold_date_sk,
+          store_sales.ss_store_sk,
+          store_sales.ss_quantity,
+          store_sales.ss_ticket_number,
+          store_sales.ss_customer_sk
+SEGMENTED BY hash(store_sales.ss_item_sk, store_sales.ss_ticket_number, store_sales.ss_customer_sk) ALL NODES OFFSET 0;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.store_sales_DBD_4_seg_DBD_TPCDS_INC_v1_b1 /*+basename(store_sales_DBD_4_seg_DBD_TPCDS_INC_v1),createtype(D)*/ 
+(
+ ss_item_sk ENCODING GCDDELTA,
+ ss_ticket_number ENCODING DELTAVAL,
+ ss_sold_date_sk ENCODING RLE,
+ ss_customer_sk ENCODING DELTAVAL,
+ ss_store_sk ENCODING RLE,
+ ss_quantity ENCODING RLE
+)
+AS
+ SELECT store_sales.ss_item_sk,
+        store_sales.ss_ticket_number,
+        store_sales.ss_sold_date_sk,
+        store_sales.ss_customer_sk,
+        store_sales.ss_store_sk,
+        store_sales.ss_quantity
+ FROM tpcds.store_sales
+ ORDER BY store_sales.ss_sold_date_sk,
+          store_sales.ss_store_sk,
+          store_sales.ss_quantity,
+          store_sales.ss_ticket_number,
+          store_sales.ss_customer_sk
+SEGMENTED BY hash(store_sales.ss_item_sk, store_sales.ss_ticket_number, store_sales.ss_customer_sk) ALL NODES OFFSET 1;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.store_returns_DBD_1_seg_DBD_TPCDS_INC_b0 /*+basename(store_returns_DBD_1_seg_DBD_TPCDS_INC),createtype(D)*/ 
+(
+ sr_item_sk ENCODING GCDDELTA,
+ sr_ticket_number ENCODING DELTARANGE_COMP,
+ sr_returned_date_sk ENCODING RLE,
+ sr_customer_sk ENCODING DELTAVAL,
+ sr_net_loss ENCODING DELTAVAL
+)
+AS
+ SELECT store_returns.sr_item_sk,
+        store_returns.sr_ticket_number,
+        store_returns.sr_returned_date_sk,
+        store_returns.sr_customer_sk,
+        store_returns.sr_net_loss
+ FROM tpcds.store_returns
+ ORDER BY store_returns.sr_returned_date_sk,
+          store_returns.sr_ticket_number
+SEGMENTED BY hash(store_returns.sr_item_sk, store_returns.sr_ticket_number, store_returns.sr_customer_sk) ALL NODES OFFSET 0;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+CREATE PROJECTION tpcds.store_returns_DBD_1_seg_DBD_TPCDS_INC_b1 /*+basename(store_returns_DBD_1_seg_DBD_TPCDS_INC),createtype(D)*/ 
+(
+ sr_item_sk ENCODING GCDDELTA,
+ sr_ticket_number ENCODING DELTARANGE_COMP,
+ sr_returned_date_sk ENCODING RLE,
+ sr_customer_sk ENCODING DELTAVAL,
+ sr_net_loss ENCODING DELTAVAL
+)
+AS
+ SELECT store_returns.sr_item_sk,
+        store_returns.sr_ticket_number,
+        store_returns.sr_returned_date_sk,
+        store_returns.sr_customer_sk,
+        store_returns.sr_net_loss
+ FROM tpcds.store_returns
+ ORDER BY store_returns.sr_returned_date_sk,
+          store_returns.sr_ticket_number
+SEGMENTED BY hash(store_returns.sr_item_sk, store_returns.sr_ticket_number, store_returns.sr_customer_sk) ALL NODES OFFSET 1;
+
+
+
+\echo NOTICE: The above create projection statement could error out if design created and implemented in the same cluster
+
+
+select mark_design_ksafe(1);
+
