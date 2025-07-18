@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import sys
-
 
 from config.columns_config import columns
+import sys
+
 
 if len(sys.argv) != 3:
     print("")

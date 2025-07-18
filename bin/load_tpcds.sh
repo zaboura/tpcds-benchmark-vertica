@@ -52,11 +52,11 @@ PY_GETCOLS="$PROJECT_ROOT/src/get_columns.py"
 GROUP="tpcds" # Adjust if you want to use a different key
 
 for table in "${tables[@]}"; do
-  # Set glob as before (special-case store table as needed)
+  # Strict matching: only files exactly for this table
   if [[ "$table" == "store" ]]; then
       pattern="${DATADIR}/store_[0-9]*.dat"
   else
-      pattern="${DATADIR}/${table}_*.dat"
+      pattern="${DATADIR}/${table}_[0-9]*_[0-9]*.dat"
   fi
 
   # Get columns string for this table
@@ -64,6 +64,7 @@ for table in "${tables[@]}"; do
   
   for file in $pattern; do
     [[ -e $file ]] || continue
+    [[ -s $file ]] || { echo "Skipping empty file $file"; continue; }
     echo "INFO: Loading $file → $SCHEMA.$table"
     vsql "${VSQL_OPTS[@]}" -c "
 COPY $SCHEMA.$table $columns
@@ -76,3 +77,4 @@ COPY $SCHEMA.$table $columns
 "
   done
 done
+echo "INFO: Loading completed"
