@@ -1,6 +1,6 @@
 # 🧪 Vertica TPC-DS Benchmark
 
-A toolkit to generate, load, and benchmark [TPC-DS](https://www.tpc.org/tpcds/) datasets on [Vertica](https://www.vertica.com/).
+A toolkit to generate, load, and benchmark [TPC-DS](https://www.tpc.org/tpcds/) datasets on [Vertica](https://www.vertica.com/) in Linux.
 
 ---
 
@@ -68,9 +68,7 @@ sh bin/load_data.sh data_100
 ---
 ### 4. 🛠️ Database Physical Design & Optimization
 
-To achieve optimal query performance on Vertica, this toolkit includes a helper script that leverages Vertica's Database Designer:
-
-### `bin/run_dbd_optimize.sh`
+To achieve optimal query performance on Vertica, this toolkit includes a helper script that leverages Vertica's Database Designer: `bin/run_dbd_optimize.sh`
 
 This script runs Vertica's comprehensive Database Designer tool to analyze your schema, query workload, and data distribution, then generates and deploys optimal physical projections for all TPC-DS tables.
 
@@ -174,7 +172,6 @@ tpcds-benchmark-vertica/
 
 - If data generation fails, ensure `dsdgen` is built and available in `bin/gen_data/`.
 - If you get connection errors, check `vertica.conf` and your Vertica server/network.
-- Windows users: Prefer Git Bash or WSL for Unix-style scripts.
 
 ---
 
