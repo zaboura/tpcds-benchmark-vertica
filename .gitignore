@@ -47,3 +47,23 @@ Thumbs.db
 # IDEs
 .vscode/
 .idea/
+# C++ build files
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+*.a
+*.lib
+*.pch
+*.pdb
+*.exp
+*.log
+*.sln
+*.vcxproj*
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+build/
