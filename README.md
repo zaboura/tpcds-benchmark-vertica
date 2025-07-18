@@ -82,10 +82,24 @@ sh bin/run_dbd_optimize.sh
 
 ### 5. 🚦 Run the TPC-DS Benchmark
 
-Execute all benchmark queries:
+This script runs TPC-DS benchmark queries against your Vertica instance, collecting performance results for each query.
+
+#### To run **all** queries in the configured directory:
 
 ```bash
 sh bin/benchmark.sh
+```
+
+#### To run a **single SQL** file:
+
+```bash
+sh bin/benchmark.sh sql/tpcds/query/tpcds/query13.sql
+```
+
+#### To run **multiple specific queries** at once (space separated):
+
+```bash
+sh bin/benchmark.sh sql/tpcds/query/tpcds/query03.sql sql/tpcds/query/tpcds/query07.sql
 ```
 
 Results and logs will be saved in the `root` directory.
