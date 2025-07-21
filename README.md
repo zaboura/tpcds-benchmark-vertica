@@ -179,6 +179,7 @@ tpcds-benchmark-vertica/
 
 - [TPC-DS Benchmark](https://www.tpc.org/tpcds/)
 - [Vertica Documentation](https://www.vertica.com/documentation/)
+- [Vertica Community Edition](https://docs.vertica.com/25.2.x/en/getting-started/community-edition-ce/)
 - [dsdgen Source](https://github.com/databricks/tpcds-kit)
 
 ---
